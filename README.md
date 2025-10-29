@@ -1,21 +1,18 @@
 # Verificador Multi-IA
 
-Extensión de Chrome que permite verificar información seleccionada enviándola simultáneamente a múltiples IAs para comparar respuestas.
+Extensión de Chrome que permite verificar información seleccionada enviándola a ChatGPT, Grok y Mistral con un prompt profesional que incluye perspectiva de género y análisis de sesgos
 
 ## Funcionalidad
 
 1. Selecciona cualquier texto en una página web
 2. Haz clic derecho para abrir el menú contextual
-3. Selecciona "Verificar con todas las IAs"
-4. Se abrirán 6 pestañas nuevas en orden alfabético:
+3. Selecciona "Fact-check con IA y perspectiva de género"
+4. Se abrirán 3 pestañas nuevas en orden alfabético:
    - ChatGPT (OpenAI)
-   - Claude (Anthropic)
-   - DeepSeek
-   - Gemini (Google)
    - Grok (X/Twitter)
    - Mistral AI
 
-Cada una con el texto seleccionado y el prompt "Por favor, verifica la información que aparece a continuación"
+Cada una con un prompt profesional de verificación de hechos que incluye perspectiva de género, análisis de sesgos y formato estructurado de respuesta
 
 ## Instalación
 
@@ -31,3 +28,11 @@ Cada una con el texto seleccionado y el prompt "Por favor, verifica la informaci
 - `background.js`: Lógica principal y manejo del menú contextual
 - `content.js`: Script de contenido (mínimo por ahora)
 - `README.md`: Este archivo de documentación
+
+## Videodemostración
+- insertar vídeodemostración con loom
+
+## Créditos
+Como citar este trabajo
+
+Proyecto financiado por la Cátedra de Feminismos 4.0 DEPO - Uvigo.

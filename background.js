@@ -2,19 +2,16 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "verificar-con-todas-las-ias",
-    title: "Verificar con todas las IAs",
+    title: "Fact-check con IA y perspectiva de género",
     contexts: ["selection"]
   });
 });
 
 // URLs base para cada IA
 const urlsIAs = {
-  grok: "https://x.com/i/grok",
   chatgpt: "https://chat.openai.com",
-  claude: "https://claude.ai/chat",
-  mistral: "https://chat.mistral.ai/chat",
-  deepseek: "https://chat.deepseek.com",
-  gemini: "https://gemini.google.com/app"
+  grok: "https://x.com/i/grok",
+  mistral: "https://chat.mistral.ai/chat"
 };
 
 // Función para construir URLs con el prompt
@@ -53,94 +50,32 @@ async function copiarAlPortapapeles(texto) {
   }
 }
 
-// Función para inyectar texto en páginas específicas
-async function inyectarTextoEnPagina(tabId, consulta, sitio) {
-  try {
-    await chrome.scripting.executeScript({
-      target: { tabId: tabId },
-      func: (texto, sitio) => {
-        setTimeout(() => {
-          let selector = '';
-          let botonEnviar = '';
 
-          switch (sitio) {
-            case 'claude':
-              selector = 'div[contenteditable="true"]';
-              botonEnviar = 'button[aria-label="Send Message"], button:has(svg)';
-              break;
-            case 'deepseek':
-              selector = 'textarea, div[contenteditable="true"]';
-              botonEnviar = 'button[type="submit"], button:has(svg)';
-              break;
-            case 'gemini':
-              selector = 'textarea[placeholder*="Enter a prompt"], div[contenteditable="true"], textarea[aria-label*="prompt"], .ql-editor, [data-testid="textbox"]';
-              botonEnviar = 'button[aria-label="Send message"], button[data-testid="send-button"], button:has(svg[data-testid="send-icon"])';
-              break;
-          }
-
-          const elemento = document.querySelector(selector);
-          if (elemento) {
-            // Llenar el campo de texto
-            if (elemento.tagName === 'TEXTAREA') {
-              elemento.value = texto;
-              elemento.dispatchEvent(new Event('input', { bubbles: true }));
-              elemento.dispatchEvent(new Event('change', { bubbles: true }));
-            } else {
-              elemento.textContent = texto;
-              elemento.dispatchEvent(new Event('input', { bubbles: true }));
-              elemento.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-            elemento.focus();
-
-            // Para Gemini, intentar enviar automáticamente
-            if (sitio === 'gemini') {
-              setTimeout(() => {
-                // Buscar el botón de enviar con múltiples selectores
-                const selectoresBoton = [
-                  'button[aria-label="Send message"]',
-                  'button[data-testid="send-button"]',
-                  'button:has(svg[data-testid="send-icon"])',
-                  'button[type="submit"]',
-                  'button:has(svg)',
-                  '[role="button"]:has(svg)',
-                  'button[aria-label*="Send"]'
-                ];
-
-                let boton = null;
-                for (const sel of selectoresBoton) {
-                  boton = document.querySelector(sel);
-                  if (boton && !boton.disabled) break;
-                }
-
-                if (boton && !boton.disabled) {
-                  boton.click();
-                } else {
-                  // Como último recurso, simular Enter
-                  elemento.dispatchEvent(new KeyboardEvent('keydown', {
-                    key: 'Enter',
-                    code: 'Enter',
-                    keyCode: 13,
-                    which: 13,
-                    bubbles: true
-                  }));
-                }
-              }, 1000); // Esperar 1 segundo después de llenar el texto
-            }
-          }
-        }, 2000); // Esperar 2 segundos para que cargue la página
-      },
-      args: [consulta, sitio]
-    });
-  } catch (error) {
-    console.log(`No se pudo inyectar texto en ${sitio}:`, error);
-  }
-}
 
 // Manejar el clic en el menú contextual
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "verificar-con-todas-las-ias" && info.selectionText) {
     const textoSeleccionado = info.selectionText;
-    const prompt = "Por favor, verifica la información que aparece a continuación";
+    const prompt = `Eres una/un verificador(a) de hechos profesional. Verifica con rigor periodístico las afirmaciones del siguiente texto buscando fuentes primarias y secundarias reputadas.
+
+CONFIGURACIÓN DE IDIOMA Y ESTILO:
+1) Detecta el idioma del texto a verificar y redacta TODO el resultado en ese idioma
+2) Usa lenguaje inclusivo y no sexista conforme al idioma detectado
+3) Respeta pronombres y nombres autoidentificados si aparecen en fuentes fiables
+
+INSTRUCCIONES:
+1) BÚSQUEDA: Prioriza documentos oficiales, organismos públicos, prensa de referencia, bases académicas, informes técnicos, y especialmente plataformas de verificación como Maldita.es, Newtral, Chequeado, PolitiFact o miembros de la International Fact-Checking Network
+2) COMPROBACIÓN: Extrae datos clave (cifras, nombres, cargos, fechas) y compáralos entre fuentes independientes
+3) SESGOS Y PERSPECTIVA DE GÉNERO: Revisa posibles sesgos, énfasis en vida personal vs. logros, lenguaje estereotipado, ausencia de fuentes diversas
+4) VEREDICTO: Etiqueta cada afirmación como Verdadero/Mayoritariamente verdadero/Mixto/Engañoso/Falso/No verificable
+
+FORMATO DE SALIDA:
+- Resumen ejecutivo (máx. 5 líneas)
+- Hallazgos por afirmación con veredicto y evidencia
+- Limitaciones y dudas abiertas
+- Fuentes: Medio — Titular — URL — Fecha publicación — Fecha acceso
+
+Texto a verificar`;
     const consultaCompleta = `${prompt}: ${textoSeleccionado}`;
 
     // Copiar la consulta completa al portapapeles como respaldo
@@ -150,8 +85,8 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     chrome.notifications.create({
       type: 'basic',
       iconUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzQyODVmNCIvPgo8cGF0aCBkPSJNMjAgMzJMMTIgMjRMMTQuNCAyMS42TDIwIDI3LjJMMzMuNiAxMy42TDM2IDEyTDIwIDMyWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+',
-      title: 'Abriendo 6 IAs',
-      message: 'Se intentará llenar automáticamente el texto en todas las plataformas.'
+      title: 'Abriendo 3 IAs',
+      message: 'ChatGPT, Grok y Mistral - Verificación con perspectiva de género.'
     });
 
     // Ordenar las IAs alfabéticamente y abrir cada una en una nueva pestaña
@@ -164,13 +99,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           url: url,
           active: index === 0 // Solo la primera pestaña será activa
         });
-
-        // Para sitios que necesitan inyección de script
-        if (['claude', 'deepseek', 'gemini'].includes(nombre)) {
-          setTimeout(() => {
-            inyectarTextoEnPagina(nuevaTab.id, consultaCompleta, nombre);
-          }, 3000); // Esperar 3 segundos para que cargue completamente
-        }
       }, index * 300); // 300ms de delay entre cada pestaña
     });
   }
