@@ -59,7 +59,7 @@ Texto a verificar: (texto seleccionado)
 
 
 ## Créditos
-Como citar este trabajo
+Como citar este trabajo:
 Martínez Rolán, L. X., Dafonte Gómez, A., Míguez González, M. I., Corbacho Valencia, J. M.,  Piñeiro Otero, T., Castro Souto, L. M., & Padilla Castillo, G. (2025, 29 outubro). Verificador Multi-IA (verifica-chrome [Repositorio en GitHub; extensión de Chrome]). GitHub. https://github.com/xabimr/verifica-chrome
 
 
