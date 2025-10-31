@@ -15,6 +15,7 @@ Extensión de Chrome que permite verificar información seleccionada enviándola
 Cada una con un prompt profesional de verificación de hechos que incluye perspectiva de género, análisis de sesgos y formato estructurado de respuesta.
 El prompt que funciona de fondo es el siguiente:
 
+<em>
 Eres una/un verificador(a) de hechos profesional. Verifica con rigor periodístico las afirmaciones del siguiente texto buscando fuentes primarias y secundarias reputadas.
 
 CONFIGURACIÓN DE IDIOMA Y ESTILO:
@@ -34,7 +35,8 @@ FORMATO DE SALIDA:
 - Limitaciones y dudas abiertas
 - Fuentes: Medio — Titular — URL — Fecha publicación — Fecha acceso
 
-Texto a verificar
+Texto a verificar: (texto seleccionado)
+</em>
 
 ## Instalación
 
@@ -58,7 +60,7 @@ Texto a verificar
 
 ## Créditos
 Como citar este trabajo
-Martínez Rolán, L. X., Míguez González, M. I., Corbacho Valencia, J. M., Dafonte Gómez, A., Piñeiro Otero, T., Castro Souto, L. M., & Padilla Castillo, G. (2025, 29 outubro). Verificador Multi-IA (verifica-chrome [Repositorio en GitHub; extensión de Chrome]). GitHub. https://github.com/xabimr/verifica-chrome
+Martínez Rolán, L. X., Dafonte Gómez, A., Míguez González, M. I., Corbacho Valencia, J. M.,  Piñeiro Otero, T., Castro Souto, L. M., & Padilla Castillo, G. (2025, 29 outubro). Verificador Multi-IA (verifica-chrome [Repositorio en GitHub; extensión de Chrome]). GitHub. https://github.com/xabimr/verifica-chrome
 
 
 Proyecto financiado por la Cátedra de Feminismos 4.0 DEPO - Uvigo.
