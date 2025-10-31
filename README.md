@@ -56,7 +56,7 @@ Texto a verificar: (texto seleccionado)
 
 ## Videodemostración de uso
 
-[![Ver demostración en Loom](https://img.shields.io/badge/Ver%20Demo-Loom-00D924?style=for-the-badge&logo=loom)](TU_ENLACE_DE_LOOM_AQUÍ)
+[<img src="images/video_thumbnail.jpg" alt="Ver demostración en Loom" width="700"><br><sub>Ver demostración en Loom</sub>](https://www.loom.com/share/TU_ID_DE_LOOM)
 
 
 ## Créditos
