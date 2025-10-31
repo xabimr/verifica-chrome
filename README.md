@@ -40,11 +40,12 @@ Texto a verificar: (texto seleccionado)
 
 ## Instalación
 
-1. Abre Chrome y ve a `chrome://extensions/`
-2. Activa el "Modo de desarrollador" en la esquina superior derecha
-3. Haz clic en "Cargar extensión sin empaquetar"
-4. Selecciona la carpeta que contiene estos archivos
-5. La extensión estará lista para usar
+1. Descarga la extensión (code > donwload zip) y descomprime la carpeta.
+2. Abre Chrome y ve a `chrome://extensions/`
+3. Activa el "Modo de desarrollador" en la esquina superior derecha
+4. Haz clic en "Cargar extensión sin empaquetar"
+5. Selecciona la carpeta que contiene estos archivos (descargada en el punto 1)
+6. La extensión estará lista para usar
 
 ## Archivos
 
