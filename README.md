@@ -56,7 +56,7 @@ Texto a verificar: (texto seleccionado)
 
 ## Videodemostración de uso
 
-[<img src="images/video_thumbnail.jpg" alt="Ver demostración en Loom" width="700"><br><sub>Ver demostración en Loom</sub>](https://www.loom.com/share/TU_ID_DE_LOOM)
+[<img src="images/video_thumbnail.jpg" alt="Ver demostración en Loom" width="700"><br><sub>Ver demostración en Loom</sub>](https://www.loom.com/share/8055c37ae30a47718a75c2c2270d1aa6)
 
 
 ## Créditos
