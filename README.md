@@ -66,3 +66,7 @@ Martínez Rolán, L. X., Dafonte Gómez, A., Míguez González, M. I., Corbacho 
 
 Proyecto financiado por la Cátedra de Feminismos 4.0 DEPO - Uvigo.
 ![Logo Verificador Multi-IA](images/logos.png)
+
+## Licencia
+Este proyecto está bajo la licencia [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).  
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)
